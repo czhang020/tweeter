@@ -1,0 +1,46 @@
+{% extends 'base.html' %} 
+{% load static %}
+
+{% block title %} SPLASH {% endblock%} 
+
+{% block styles %} {% endblock %} 
+
+{% block body %}
+<div class="container">
+  <div class="row">
+    <div class="col">
+     
+    </div>
+    <div class="col-8">
+      <h1 class="text-center bg-info">register / login</h1>
+    <div>
+      <h2 class="text-center">sign up</h2>
+      <div class="row justify-content-center">
+        <form method="POST" action="/signup/">
+          {% csrf_token %}
+          <input name="username" type="text" placeholder="Username" />
+          <input name="email" type="email" placeholder="Enter Email" />
+          <input name="password" type="password" placeholder="Password" />
+          <button type="submit" class="btn btn-info btn-sm">sign up</button>
+        </form>
+      </div>
+    </div>
+    <div>
+      <h2 class="text-center">log in</h2>
+      <div class="row justify-content-center">
+        <form method="POST" action="/login/">
+          {% csrf_token %}
+          <input name="username" type="text" placeholder="Enter username" />
+          <input name="password" type="password" placeholder="Password" />
+          <button type="submit" class="btn btn-info btn-sm">login</button>
+        </form>
+      </div>
+    </div>
+    </div>
+    <div class="col">
+      
+    </div>
+  </div>
+</div>
+
+{% endblock %}

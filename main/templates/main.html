@@ -1,0 +1,59 @@
+
+{% extends 'base.html' %} {% load static %} 
+
+{% block title %} home :) {% endblock %} 
+{% block styles %} {% endblock %} 
+
+{% block body %}
+<h1 class="text-center">hello, {{ user.username }}!</h1>
+
+<div class="row justify-content-center">
+  <a href="/logout"><button class="btn btn-info btn-sm">logout</button></a>
+</div>
+
+<div class="row justify-content-center">
+    <form method="POST" action="/">
+      {% csrf_token %}
+      <h2 class="text-center">tweet something!</h2>
+      <input name="body" placeholder="what's on your mind :)" />
+      <input type="submit" value="post tweet" />
+    </form>
+</div>
+
+<div>
+  <p class="text-white">lol idk how to add padding</p>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+   
+    </div>
+    <div class="col-8">
+      {% for tweet in tweets %}
+    <div class="tweet-card pt-3 pr-3 pl-3 pb-1 m-5 bg-info text-white">
+      <p class="text-center" style="border:3px; border-style:solid; border-color:#dcfaf8; padding: 1em;">
+        <strong>{{ tweet.author.username }}</strong> |
+        <i>{{ tweet.created_at }}</i><br/>
+        {{ tweet.body }}<br/>
+        <a class="text-dark" href="/like?id={{tweet.id}}">
+          {% if request.user in tweet.likes.all %}
+            unlike
+          {% else %}
+            like
+          {% endif %}
+        </a> ({{ tweet.likes.count }} &hearts;)<br/>
+        {% if tweet.author == user %}
+        <a class="text-dark" href="delete?id={{tweet.id}}">delete tweet</a>
+      {% endif %}
+      </p>
+    </div>
+  {% endfor %}
+    </div>
+    <div class="col">
+      
+    </div>
+  </div>
+</div>
+
+{% endblock %}
